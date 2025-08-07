@@ -1,0 +1,30 @@
+@use "sass:color";
+@use "_variables.scss";
+@use "_breakpoints.scss";
+
+*,::after,::before,::backdrop,::file-selector-button {
+  border-color: var(--color-gray-200, currentColor);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  &-track {
+    background-color: var(--black);
+  }
+  &-thumb {
+    background-color: color.adjust(#CDCDCD, $lightness: -15%);
+  }
+}
+
+*{
+  scrollbar-width: thin;
+  scrollbar-color: #bdc3c7 var(--black);
+}
+
+html, body, #root{
+  height: 100%;
+}
+
+#root{
+  position: relative;
+}

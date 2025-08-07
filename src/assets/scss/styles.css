@@ -1,0 +1,26 @@
+*, ::after, ::before, ::backdrop, ::file-selector-button {
+  border-color: var(--color-gray-200, currentColor);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background-color: var(--black);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(166.75, 166.75, 166.75);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bdc3c7 var(--black);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  position: relative;
+}/*# sourceMappingURL=styles.css.map */
