@@ -6,6 +6,17 @@ export default function WeatherCard() {
 	if (!weather) return null;
 
 	const dt = new Date((weather.dt || Date.now()) * 1000);
+
+	function formatAtOffset(unixSeconds, offsetSeconds, locale = "en-US") {
+		const shiftedMs = (unixSeconds + offsetSeconds) * 1000;
+		return new Intl.DateTimeFormat(locale, {
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: true,
+			timeZone: "UTC", // keep UTC so we don't reapply system offset
+		}).format(new Date(shiftedMs));
+	}
+
 	return (
 		<>
 			<div className="card card-body today-short mb-2">
@@ -56,9 +67,10 @@ export default function WeatherCard() {
 							<div className="ms-2">
 								<p className="m-0">{t("Sunrise", "সূর্যোদয়", lang)}</p>
 								<p className="m-0">
-									{new Date(weather.sys.sunrise * 1000).toLocaleTimeString(
-										lang === "bn" ? "bn-BD" : "en-US",
-										{ hour: "2-digit", minute: "2-digit" }
+									{formatAtOffset(
+										weather.sys.sunrise,
+										weather.timezone,
+										lang === "bn" ? "bn-BD" : "en-US"
 									)}
 								</p>
 							</div>
@@ -70,9 +82,10 @@ export default function WeatherCard() {
 							<div className="ms-2">
 								<p className="m-0">{t("Sunset", "সূর্যাস্ত", lang)}</p>
 								<p className="m-0">
-									{new Date(weather.sys.sunset * 1000).toLocaleTimeString(
-										lang === "bn" ? "bn-BD" : "en-US",
-										{ hour: "2-digit", minute: "2-digit" }
+									{formatAtOffset(
+										weather.sys.sunset,
+										weather.timezone,
+										lang === "bn" ? "bn-BD" : "en-US"
 									)}
 								</p>
 							</div>
